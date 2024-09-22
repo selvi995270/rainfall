@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" 
+          href="static/css/charts.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+            <!-- Include your style.css -->
+
+    
+      <link rel="stylesheet" href="static//libs/v8.2.0-package/ol.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      <link rel="stylesheet" href="static/libs/v8.2.0-package/ol.css">
+      <link rel="stylesheet" href="https://openlayers.org/en/latest/css/ol.css" type="text/css">
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+      <!-- Include jQuery and Chart.js libraries -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <script src="static/libs/v8.2.0-package/dist/ol.js"></script>
+     <script src="https://openlayers.org/en/latest/build/ol.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
+
+     <!-- Include your app.js script -->
+
+     <script src="static/libs/v8.2.0-package/dist/ol.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <script src="static/js/script.js"></script>
+     <script src="https://cdn.plot.ly/plotly-2.34.0.min.js" charset="utf-8"></script>
+<style>
+  
+</style>
+</head>
+<body>
+    <div id="wrap">
+
+
+         <!-- top bar -->
+        <div id="top-nav">
+
+              <!-- top left -->
+            <div class="lf-nav">
+                <p>Dashboard</p>
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        
+
+            <!-- top right -->
+        <div class="rt-nav">
+            
+  
+                <span><input type="text" placeholder="Search..."></span>
+          
+                
+                <i class="fas fa-bell icon"></i>
+               
+                
+                <img src="./assets/logo.png" alt="Logo">
+               
+        </div>
+        </div>
+
+
+        <!-- bottom nav -->
+<div class="btm-nav">
+
+             <!-- side bar -->
+            <div id="side-nav">
+                <div class="sidebar">
+                    <ul> 
+                        <li><button class="btn"><i class="fa-solid fa-house"></i><a href="index.html">Home</a></button></li>
+                        <li><button class="btn"><i class="fa-solid fa-chart-simple"></i><a href="charts.html">Charts</a></button></li>
+                        <li><button class="btn"><i class="fa-solid fa-map-location-dot"></i><a href="map.html">Map</a></button></li>                    
+                    </ul>
+                </div>
+            </div>
+
+
+
+             <!-- right side content -->
+ <div class="aside">
+
+
+<div class="pls">
+    <div class="pl1">
+        <h2>Charts</h2>
+    </div>
+    
+    <div class="pl">
+        <button class="plot1"><a href="plotly.html">Plotly</a></button>
+        <button class="plot1"><a href="chartjs.html">ChartsJs</a></button>
+
+    </div>
+
+</div>
+
+
+    <div id="container1">    
+        <canvas id="chart1"  style="width:100%;max-width:650px;height:100%;max-height:700px;">Piecharts</canvas>
+        <canvas id="chart2"  style="width:100%;max-width:600px;height:100%;max-height:330px;">Linecharts</canvas>
+    </div>
+    <!-- <div id="container1">    
+        <canvas id="chart11"  style="width:100%;max-width:650px;height:100%;max-height:700px;">Piecharts</canvas>
+        <canvas id="chart22"  style="width:100%;max-width:600px;height:100%;max-height:700px;">Linecharts</canvas>
+    </div> -->
+    
+</div>
+
+ <!-- do not touch the div -->
+</div>
+   </body>
+   <script>
+
+    
+    
+
+
+      // Fetch the JSON file
+      fetch('./static/js/fall.json')
+          .then(response => response.json())
+          .then(data => {
+              // Pass the data to the updateBarChart function
+              updateBarChart(data);
+              updateHorizontalBarChart(data);
+             
+          })
+          .catch(error => console.error('Error loading JSON file:', error));
+      
+      // Function to update the bar chart
+      function updateBarChart(data) {
+          console.log("Updating chart with data:", data);
+      
+          var labels_bar = data.map(entry => entry.year);
+          var rainfall = data.map(entry => entry.jan);
+      
+          var ctx = document.getElementById("chart1").getContext('2d');
+          var myBarChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: labels_bar,
+                  datasets: [{
+                      label: "January Rainfall",
+                      backgroundColor: [
+                          'rgb(255, 144, 188, 0.2)',
+                          'rgb(217, 237, 191, 0.6)',
+                          'rgb(255, 192, 217, 0.2)',
+                          'rgb(138, 205, 215, 0.2)',
+                          'rgb(161, 238, 189, 0.2)',
+                          'rgb(243, 182, 100, 0.2)',
+                          'rgb(245, 238, 230, 0.8)',
+                          'rgb(225, 199, 143, 0.2)',
+                          'rgb(243, 182, 100, 0.2)'
+                      ],
+                      borderColor: [
+                          'rgb(255, 144, 188, 1)',
+                          'rgb(217, 237, 191, 1)',
+                          'rgb(255, 192, 217, 1)',
+                          'rgb(138, 205, 215, 1)',
+                          'rgb(161, 238, 189, 1)',
+                          'rgb(243, 182, 100, 1)',
+                          'rgb(245, 238, 230, 1)',
+                          'rgb(225, 199, 143, 1)',
+                          'rgb(243, 182, 100, 1)'
+                      ],
+                      borderWidth: 1,
+                      data: rainfall,
+                  }]
+              },
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  },
+                  legend: { display: false },
+                  title: {
+                      display: false,
+                      text: 'Rain fall'
+                  }
+              }
+          });
+      }
+    
+  /* Horizontal Bar chart */
+function updateHorizontalBarChart(data) {
+    console.log("Updating chart with data:", data);
+
+    var labels_ba = data.map(entry => entry.year);
+    var rainfallen = data.map(entry => entry.nov);
+
+    var cth = document.getElementById("chart2").getContext('2d');
+    var myHorizontalBarChart = new Chart(cth, {
+        type: 'bar',
+        data: {
+            labels: labels_ba,
+            datasets: [{
+                label: "November Rainfall",
+                backgroundColor: [
+                    'rgb(255, 144, 188, 0.2)',
+                    'rgb(217, 237, 191, 0.6)',
+                    'rgb(255, 192, 217, 0.2)',
+                    'rgb(138, 205, 215, 0.2)',
+                    'rgb(161, 238, 189, 0.2)',
+                    'rgb(243, 182, 100, 0.2)',
+                    'rgb(245, 238, 230, 0.8)',
+                    'rgb(225, 199, 143, 0.2)',
+                    'rgb(243, 182, 100, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 144, 188, 1)',
+                    'rgb(217, 237, 191, 1)',
+                    'rgb(255, 192, 217, 1)',
+                    'rgb(138, 205, 215, 1)',
+                    'rgb(161, 238, 189, 1)',
+                    'rgb(243, 182, 100, 1)',
+                    'rgb(245, 238, 230, 1)',
+                    'rgb(225, 199, 143, 1)',
+                    'rgb(243, 182, 100, 1)'
+                ],
+                borderWidth: 1,
+                data: rainfallen,
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true
+                }
+            },
+            legend: { display: false ,
+                labels: {
+                    fontSize: 2 // Set the font size for the legend
+                  }
+            },
+            title: {
+                display: false,
+                text: 'Rainfall in November'
+            }
+        }
+    });
+}
+
+function plotBarChart(data) {
+    var years = data.map(entry => entry.year);
+    var janRainfall = data.map(entry => entry.jan);
+
+    var trace1 = {
+        x: years,
+        y: janRainfall,
+        type: 'bar',
+        marker: {
+            color: 'rgba(75, 192, 192, 0.6)'
+        }
+    };
+
+    var layout = {
+        title: 'January Rainfall',
+        xaxis: { title: 'Year' },
+        yaxis: { title: 'Rainfall (mm)' }
+    };
+
+    Plotly.newPlot('chart11', [trace1], layout);
+}
+
+function plotDoughnutChart(data) {
+    var years = data.map(entry => entry.year);
+    var febRainfall = data.map(entry => entry.feb);
+
+    var trace2 = {
+        labels: years,
+        values: febRainfall,
+        type: 'pie',
+        hole: .4, // This creates the doughnut effect
+        marker: {
+            colors: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)'
+            ]
+        }
+    };
+
+    var layout = {
+        title: 'February Rainfall',
+    };
+
+    Plotly.newPlot('chart22', [trace2], layout);
+}
+
+
+
+
+
+
+
+   
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="static/js/script.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.34.0.min.js" charset="utf-8"></script>
+
+
+  </html>

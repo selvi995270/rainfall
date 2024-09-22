@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+                <!-- Include your style.css -->
+
+      <link rel="stylesheet" href="static/css/style.css">
+      <link rel="stylesheet" href="static/libs/v8.2.0-package/ol.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      <link rel="stylesheet" href="static/libs/v8.2.0-package/ol.css">
+      <link rel="stylesheet" href="https://openlayers.org/en/latest/css/ol.css" type="text/css">
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+      <!-- Include jQuery and Chart.js libraries -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <script src="static/libs/v8.2.0-package/dist/ol.js"></script>
+     <script src="https://openlayers.org/en/latest/build/ol.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
+
+     
+     <!-- Include your app.js script -->
+
+     <script src="static/libs/v8.2.0-package/dist/ol.js"></script>
+     <script src="static/js/script.js"></script>
+     
+   <link rel="stylesheet" href="static/libs/v8.2.0-package/ol.css">
+     
+   
+ 
+
+     
+</head>
+<body >
+    <div id="wrap">
+        <!-- top bar -->
+        <div id="top-nav">
+
+
+             <!-- top left -->
+            <div class="lf-nav">
+                <p>Dashboard</p>
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        
+
+             <!-- top right -->
+        <div class="rt-nav">
+            <!-- <label class="toggle-switch">
+                <input type="checkbox" id="modeToggle">
+                </label> -->
+            </label>
+  
+                <span><input type="text" placeholder="Search..."></span>
+          
+                
+                <i class="fas fa-bell icon"></i>
+               
+                
+                <img src="./assets/logo.png" alt="Logo">
+               
+        </div>
+        </div>
+
+
+   
+        <!-- side bar -->
+        <div id="side-nav">
+            <div class="sidebar">
+                <ul> 
+                <li><button class="btn"> <i class="fa-solid fa-house"></i><a href="index.html">Home</a></button></li>
+                <li><button class="btn"> <i class="fa-solid fa-chart-simple"></i><a href="charts.html">Charts</a></button></li>
+                <li><button class="btn"> <i class="fa-solid fa-map-location-dot"></i><a href="map.html">Map</a></button></li>
+                <li><button class="btn"> <i class="fa-solid fa-map-location-dot"></i><a href="table.html">Table</a></button></li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <!-- right side content -->
+<div class="aside">
+    <div class="section"  >
+                <div class="box-1" ><h4>Total Rainfall<i class="fa-solid fa-cloud-sun-rain "></i></h4><h5>133055.5</h5><h6>Year:1991 To 2013</h6></div>
+                <div class="box-1" ><h4>Maximum Rainfall<i class="fa-solid fa-cloud-moon-rain "></i></h4><h5>1463.9</h5><h6>Year:1917</h6></div>
+                <div class="box-1" ><h4>Minimum Rainfall<i class="fa-sharp fa-solid fa-cloud-rain "></i></h4><h5>947.1</h5><h6>Year:1972</h6></div>
+                <div class="box-1" ><h4>Current Rainfall<i class="fa-duotone fa-solid fa-temperature-half  " ></i></h4><h5>1092.5</h5><h6>Year:2013</h6></div>
+                
+    </div>
+                
+    <div id="section1">
+    <canvas id="box" style="width:100%;max-width:600px;height:100%;max-height:500px;">charts</canvas>
+    <div id="map" style="width:100%;max-width:650px;height:100%;max-height:500px;"></div>
+    </div>
+            
+   
+
+
+      
+              
+            
+</div>
+                  <!-- do not touch the div -->
+                
+     </div>
+
+        
+</body>
+<script src="./libs/v8.2.0-package/dist/ol.js"></script>
+<script src="./static/js/script.js"></script>
+<script>
+    const ctx = document.getElementById('box');
+    var myLineChart;
+
+
+
+
+
+
+   // Fetch the JSON file
+fetch('./static/js/fall.json')
+.then(response => response.json())
+.then(data => {
+    // Pass the data to the updateBarChart function
+    updateAllChart(data);
+})
+.catch(error => console.error('Error loading JSON file:', error));
+    
+
+ /*line All chart */
+function updateAllChart(data) {
+    console.log("Updating chart with data:", data);
+
+    var year = data.map(entry => entry.year);
+    var jan = data.map(entry => entry.jan);
+    var feb = data.map(entry => entry.feb);
+    var mar = data.map(entry => entry.mar);
+    var apr = data.map(entry => entry.apr);
+    var may = data.map(entry => entry.may);
+    var jun = data.map(entry => entry.jun);
+    var jul = data.map(entry => entry.jul);
+    var aug = data.map(entry => entry.aug);
+    var sep = data.map(entry => entry.sep);
+    var oct = data.map(entry => entry.oct);
+    var nov = data.map(entry => entry.nov);
+    var dec = data.map(entry => entry.dec);
+
+    
+    var ctA = document.getElementById("box").getContext('2d');
+
+    var myAllChart = new Chart(ctA, {
+        type: 'line',
+        data: {
+           
+            labels: year,
+            datasets: [
+                {
+                    label: "Jan",
+                    backgroundColor: 'rgb(255, 144, 188, 0.2)',
+                    borderColor: 'rgb(255, 144, 188)',
+                    borderWidth: 1,
+                    data: jan,
+                    fill: false,
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4,
+            pointStyle: 'rectRot'
+                },
+            
+
+                {
+                    label: "Feb",
+                    backgroundColor: 'rgb(217, 237, 191, 0.2)',
+                    borderColor: 'rgb(217, 237, 191)',
+                    borderWidth: 1,
+                    data: feb,
+                    fill: false,
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4,
+            pointStyle: 'rectRot'
+                },
+                {
+                    label: "Mar",
+                    backgroundColor: 'rgb(192, 192, 192, 0.2)',
+                    borderColor: 'rgb(192, 192, 192)',
+                    borderWidth: 1,
+                    data: mar,
+                    fill: false,
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4,
+            pointStyle: 'rectRot'
+                },
+                {
+                    label: "Apr",
+                    backgroundColor: 'rgb(255, 128, 255, 0.2)',
+                    borderColor: 'rgb(255, 128, 255)',
+                    borderWidth: 1,
+                    data: apr,
+                    fill: false,
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4,
+            pointStyle: 'rectRot'
+                },
+                {
+                    label: "May",
+                    backgroundColor: 'rgb(255, 255, 128, 0.2)',
+                    borderColor: 'rgb(255, 255, 128)',
+                    borderWidth: 1,
+                    data: may,
+                    fill: false,
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4,
+            pointStyle: 'rectRot'
+                },
+                {
+                    label: "Jun",
+                    backgroundColor: 'rgb(128, 128, 255, 0.2)',
+                    borderColor: 'rgb(128, 128, 255)',
+                    borderWidth: 1,
+                    data: jun,
+                    fill: false,
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4,
+            pointStyle: 'rectRot'
+                },
+                {
+                    label: "Jul",
+                    backgroundColor: 'rgb(128, 255, 128, 0.2)',
+                    borderColor: 'rgb(128, 255, 128)',
+                    borderWidth: 1,
+                    data: jul,
+                    fill: false,
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4,
+            pointStyle: 'rectRot'
+                },
+                {
+                    label: "Aug",
+                    backgroundColor: 'rgb(255, 128, 128, 0.2)',
+                    borderColor: 'rgb(255, 128, 128)',
+                    borderWidth: 1,
+                    data: aug,
+                    fill: false,
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4,
+            pointStyle: 'rectRot'
+                },
+                {
+                    label: "Sep",
+                    backgroundColor: 'rgb(161, 238, 189, 0.2)',
+                    borderColor: 'rgb(161, 238, 189)',
+                    borderWidth: 1,
+                    data: sep,
+                    fill: false,
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4,
+            pointStyle: 'rectRot'
+                },
+                {
+                    label: "Oct",
+                    backgroundColor: 'rgb(138, 205, 215, 0.2)',
+                    borderColor: 'rgb(138, 205, 215)',
+                    borderWidth: 1,
+                    data: oct,
+                    fill: false,
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4,
+            pointStyle: 'rectRot'
+                },
+                {
+                    label: "Nov",
+                    backgroundColor: 'rgb(138, 205, 215, 0.2)',
+                    borderColor: 'rgb(138, 205, 215)',
+                    borderWidth: 1,
+                    data: nov,
+                    fill: false,
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4,
+            pointStyle: 'rectRot'
+                },
+                {
+                    label: "Dec",
+                    backgroundColor: 'rgb(255, 192, 217, 0.2)',
+                    borderColor: 'rgb(255, 192, 217)',
+                    borderWidth: 1,
+                    data: dec,
+                    fill: false,
+            cubicInterpolationMode: 'monotone',
+            tension: 0.4,
+            pointStyle: 'rectRot'
+                    
+                },
+            ]
+        },
+        options: {
+            aspectRatio: 1.3, // Adjust this value to control the size of the chart
+            maintainAspectRatio: true,
+            
+        }
+    });
+}
+
+
+
+
+
+
+      window.onload = init;
+
+      function init() {
+          const map = new ol.Map({
+              view: new ol.View({
+                  center: [12.5, 41.9],
+                  zoom: 5
+              }),
+              layers: [
+                  new ol.layer.Tile({
+                      source: new ol.source.OSM()
+                  })
+              ],
+              target: 'map' // Corrected the target ID to 'map'
+              
+          });
+      }
+       // Create a point feature
+       var pointFeature = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([77.2090, 28.6139]))  // Coordinates for New Delhi
+    });
+
+    // Style for the point (marker)
+    var pointStyle = new ol.style.Style({
+        image: new ol.style.Icon({
+            anchor: [0.5, 1],  // Anchor the icon at its base
+            src: 'https://openlayers.org/en/v6.5.0/examples/data/icon.png'  // URL to the marker image
+        })
+    });
+    pointFeature.setStyle(pointStyle);
+
+    // Create a vector source and layer to hold the point
+    var vectorSource = new ol.source.Vector({
+        features: [pointFeature]
+    });
+
+    var vectorLayer = new ol.layer.Vector({
+        source: vectorSource
+    });
+
+    // Add the vector layer to the map
+    map.addLayer(vectorLayer);
+
+
+
+</script>
+</html>

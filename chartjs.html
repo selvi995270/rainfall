@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+            <!-- Include your style.css -->
+
+            
+      <link rel="stylesheet" href="static/css/chartjs.css">
+      <link rel="stylesheet" href="static/venv/libs/v8.2.0-package/ol.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      <link rel="stylesheet" href="static/venv/libs/v8.2.0-package/ol.css">
+      <link rel="stylesheet" href="https://openlayers.org/en/latest/css/ol.css" type="text/css">
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+      <!-- Include jQuery and Chart.js libraries -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <script src="static/venv/libs/v8.2.0-package/dist/ol.js"></script>
+     <script src="https://openlayers.org/en/latest/build/ol.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
+
+     <!-- Include your app.js script -->
+
+     <script src="static/venv/libs/v8.2.0-package/dist/ol.js"></script>
+    
+     
+    
+     
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ 
+     
+
+</head>
+<body>
+    <div id="wrap">
+
+         <!-- top bar -->
+        <div id="top-nav">
+
+            <!-- top left -->
+            <div class="lf-nav">
+                <p>Dashboard</p>
+                <i class="fa-solid fa-bars"></i>
+
+            </div>
+             <!-- top right -->
+        <div class="rt-nav">
+            
+  
+                <span><input type="text" placeholder="Search..."></span>
+          
+                
+                <i class="fas fa-bell icon"></i>
+               
+                
+                <img src="./assets/logo.png" alt="Logo">
+               
+        
+        </div>
+        </div>
+
+         <!-- bottom nav -->
+
+<div class="btm-nav">
+
+            <!-- side bar -->
+
+    <div id="side-nav">
+                <div class="sidebar">
+                    <ul> 
+                    <li><button class="btn"><i class="fa-solid fa-house"></i><a href="index.html">Home</a></button></li>
+                    <li><button class="btn"><i class="fa-solid fa-chart-simple"></i><a href="charts.html">Charts</a></button></li>
+                    <li><button class="btn"><i class="fa-solid fa-map-location-dot"></i><a href="map.html">Map</a></button></li>
+                    </ul> 
+                </div>
+    </div>
+            
+
+             <!-- right side content -->
+
+    <div class="aside">
+
+
+                <div class="pls">
+                    <div class="pl1">
+                        <h2>Chartjs</h2>
+                    </div>
+                    
+                    <div class="pl">
+                
+                  
+                        <button class="plot1"><a href="plotly.html">Plotly</a></button>
+                        <button class="plot1"><a href="chartjs.html">ChartsJs</a></button>
+                
+                    </div>
+                
+                </div>
+                
+                
+    <div id="chartjs1">    
+            <canvas id="cj1"  style="width:100%;max-width:400px;height:100%;max-height:400px;">chartjs</canvas>
+            <canvas id="cj2"  style="width:100%;max-width:400px;height:100%;max-height:400px;">chartjs</canvas>
+            <canvas id="cj3"  style="width:100%;max-width:450px;height:100%;max-height:400px;">chartjs</canvas>
+                   
+    </div>
+    
+    <div id="chartjs2" >    
+            <canvas id="cj4" style="width:100%;max-width:400px;height:100%;max-height:400px;">chartjs</canvas>
+            <canvas id="cj5" style="width:100%;max-width:400px;height:100%;max-height:400px;">chartjs</canvas>
+            <canvas id="cj6" style="width:100%;max-width:450px;height:100%;max-height:400px;">chartjs</canvas>
+    </div>
+    <div id="chartjs3" >    
+            <canvas id="cj7" style="width:100%;max-width:650px;height:100%;max-height:500px;">chartjs</canvas>
+            <canvas id="cj8" style="width:100%;max-width:600px;height:100%;max-height:300px;">chartjs</canvas>
+           
+           
+           
+    </div>
+   
+    </div>
+                    
+</div>
+                  <!-- do not touch the div -->
+    </div>
+   </body>                     
+
+<script>
+
+
+ 
+
+
+
+
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
+
+<script>
+    
+    
+
+
+// Fetch the JSON file
+fetch('./static/js/fall.json')
+    .then(response => response.json())
+    .then(data => {
+        // Pass the data to the updateBarChart function
+        updateBarChart(data);
+        updatedoughChart(data);
+        updatepieChart(data);
+        updatepolarArea(data);
+        updateRadar(data);
+        updateScatter(data);
+        updateMixed(data);
+        updateBubbleChart(data) ;
+    })
+    .catch(error => console.error('Error loading JSON file:', error));
+
+// Function to update the bar chart
+function updateBarChart(data) {
+    console.log("Updating chart with data:", data);
+
+    var labels_bar = data.map(entry => entry.year);
+    var rainfall = data.map(entry => entry.jan);
+
+    var ctx = document.getElementById("cj1").getContext('2d');
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels_bar,
+            datasets: [{
+                label: "January Rainfall",
+                backgroundColor: [
+                    'rgb(255, 144, 188, 0.2)',
+                    'rgb(217, 237, 191, 0.6)',
+                    'rgb(255, 192, 217, 0.2)',
+                    'rgb(138, 205, 215, 0.2)',
+                    'rgb(161, 238, 189, 0.2)',
+                    'rgb(243, 182, 100, 0.2)',
+                    'rgb(245, 238, 230, 0.8)',
+                    'rgb(225, 199, 143, 0.2)',
+                    'rgb(243, 182, 100, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 144, 188, 1)',
+                    'rgb(217, 237, 191, 1)',
+                    'rgb(255, 192, 217, 1)',
+                    'rgb(138, 205, 215, 1)',
+                    'rgb(161, 238, 189, 1)',
+                    'rgb(243, 182, 100, 1)',
+                    'rgb(245, 238, 230, 1)',
+                    'rgb(225, 199, 143, 1)',
+                    'rgb(243, 182, 100, 1)'
+                ],
+                borderWidth: 1,
+                data: rainfall,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            legend: { display: false },
+            title: {
+                display: false,
+                text: 'Rain fall'
+            }
+        }
+    });
+}
+
+
+
+
+
+
+/* doughnut chart*/
+
+function updatedoughChart(data) {
+    console.log("Updating chart with data:", data);
+
+    var labels_feb = data.map(entry => entry.year);
+    var rainfall = data.map(entry => entry.feb);
+
+    var ctp = document.getElementById("cj2").getContext('2d');
+    var myDoughChart = new Chart(ctp, {
+        type: 'doughnut',
+        data: {
+            labels: labels_feb,
+            datasets: [{
+                label: "February Rainfalls",
+                backgroundColor: [
+                    'rgba(255, 144, 188, 0.6)',
+                    'rgba(217, 237, 191, 0.6)',
+                    'rgba(255, 192, 217, 0.6)',
+                    'rgba(138, 205, 215, 0.6)',
+                    'rgba(161, 238, 189, 0.6)',
+                    'rgba(243, 182, 100, 0.6)',
+                    'rgba(245, 238, 230, 0.6)',
+                    'rgba(225, 199, 143, 0.6)',
+                    'rgba(243, 182, 100, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(255, 144, 188, 1)',
+                    'rgba(217, 237, 191, 1)',
+                    'rgba(255, 192, 217, 1)',
+                    'rgba(138, 205, 215, 1)',
+                    'rgba(161, 238, 189, 1)',
+                    'rgba(243, 182, 100, 1)',
+                    'rgba(245, 238, 230, 1)',
+                    'rgba(225, 199, 143, 1)',
+                    'rgba(243, 182, 100, 1)'
+                ],
+                borderWidth: 1,
+                data: rainfall,
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true // Displaying the legend is typical for a doughnut chart
+                },
+                title: {
+                    display: true,
+                    text: 'February Rainfall Chart'
+                }
+            },
+            aspectRatio: 1.3, // This controls the size of the chart
+            maintainAspectRatio: true,
+        }
+    });
+}
+
+
+
+/*Pie Chart */
+function updatepieChart(data) {
+    console.log("Updating chart with data:", data);
+
+    var labels_pie = data.map(entry => entry.year);
+    var rainfall = data.map(entry => entry.mar);
+
+    var cth = document.getElementById("cj3").getContext('2d');
+    var myPieChart = new Chart(cth, {
+        type: 'pie',
+        data: {
+            labels: labels_pie,
+            datasets: [{
+                label: "March Rainfall",
+                axis: 'y',
+                backgroundColor: [
+                    'rgb(255, 144, 188, 0.2)',
+                    'rgb(217, 237, 191, 0.6)',
+                    'rgb(255, 192, 217, 0.2)',
+                    'rgb(138, 205, 215, 0.2)',
+                    'rgb(161, 238, 189, 0.2)',
+                    'rgb(243, 182, 100, 0.2)',
+                    'rgb(245, 238, 230, 0.8)',
+                    'rgb(225, 199, 143, 0.2)',
+                    'rgb(243, 182, 100, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 144, 188, 1)',
+                    'rgb(217, 237, 191, 1)',
+                    'rgb(255, 192, 217, 1)',
+                    'rgb(138, 205, 215, 1)',
+                    'rgb(161, 238, 189, 1)',
+                    'rgb(243, 182, 100, 1)',
+                    'rgb(245, 238, 230, 1)',
+                    'rgb(225, 199, 143, 1)',
+                    'rgb(243, 182, 100, 1)'
+                ],
+                borderWidth: 1,
+                data: rainfall,
+            }]
+        },
+        options: {
+
+            indexAxis: 'y',
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            aspectRatio: 2, // Adjust this value to control the size of the chart
+            maintainAspectRatio: true,
+            title: {
+                display: false,
+                text: 'Rainfall Chart'
+            }
+        }
+    });
+}
+
+
+
+
+
+
+/*polarArea chart */
+function updatepolarArea(data) {
+    console.log("Updating chart with data:", data);
+
+    var labels_pol = data.map(entry => entry.year);
+    var fallen = data.map(entry => entry.apr);
+
+    var ctpp = document.getElementById("cj4").getContext('2d');
+    var mypolarArea = new Chart(ctpp, {
+        type: 'polarArea',
+        data: {
+            labels: labels_pol,
+            datasets: [{
+                label: "April Rainfall",
+                backgroundColor: [
+                    'rgb(255, 144, 188, 0.2)',
+                    'rgb(217, 237, 191, 0.6)',
+                    'rgb(255, 192, 217, 0.2)',
+                    'rgb(138, 205, 215, 0.2)',
+                    'rgb(161, 238, 189, 0.2)',
+                    'rgb(243, 182, 100, 0.2)',
+                    'rgb(245, 238, 230, 0.8)',
+                    'rgb(225, 199, 143, 0.2)',
+                    'rgb(243, 182, 100, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 144, 188, 1)',
+                    'rgb(217, 237, 191, 1)',
+                    'rgb(255, 192, 217, 1)',
+                    'rgb(138, 205, 215, 1)',
+                    'rgb(161, 238, 189, 1)',
+                    'rgb(243, 182, 100, 1)',
+                    'rgb(245, 238, 230, 1)',
+                    'rgb(225, 199, 143, 1)',
+                    'rgb(243, 182, 100, 1)'
+                ],
+                borderWidth: 1,
+                data: fallen,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            aspectRatio: 1.3, // Adjust this value to control the size of the chart
+            maintainAspectRatio: true,
+            title: {
+                display: false,
+                text: 'Rainfall Chart'
+            }
+        }
+    });
+}
+
+
+
+
+
+/* radar chart */
+function updateRadar(data) {
+    console.log("Updating chart with data:", data);
+
+    var labels_r = data.map(entry => entry.year);
+    var fallenz = data.map(entry => entry.may);
+    var fallen = data.map(entry => entry.jun);
+
+ 
+    var ctr = document.getElementById("cj5").getContext('2d');
+    var myradar = new Chart(ctr, {
+        type: 'radar',
+        data: {
+            labels: labels_r,
+            datasets: [{
+                label: "May Rainfall",
+                backgroundColor: [
+                    'red',
+                ],
+                borderColor: [
+                    'rgb(243, 182, 100, 1)'
+                ],
+                borderWidth: 1,
+                data: fallenz,
+            }, {
+                label: 'June 2nd', // Fixed typo in the label
+                fill: true,
+                backgroundColor: 'rgba(255, 242, 0,1.0)',
+                borderColor: 'rgba(255, 56, 56,1.0)',
+                borderWidth: 1,
+                data: fallen,
+            }]
+        },
+        options: {
+            scales: {
+   
+                y: {
+                    beginAtZero: true,
+                
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true
+                }
+            },
+            aspectRatio: 1.2, // Adjust this value to control the size of the chart
+            maintainAspectRatio: true,
+                title: {
+                    display: false,
+                    text: 'Rainfall Chart',
+                    fontSize: 2 // Set the font size for the legend
+
+            }
+        }
+    });
+}
+
+
+
+
+
+
+/* Scatter chart */
+function updateScatter(data) {
+    console.log("Updating chart with data:", data);
+
+    var labels_s = data.map(entry => entry.year);
+    var fallen = data.map(entry => entry.jul);
+    
+    var cta = document.getElementById("cj6").getContext('2d');
+    var myScatter = new Chart(cta, {
+        type: 'scatter',
+        data: {
+            labels: labels_s,
+            datasets: [{
+                label: "July Rainfall",
+                data: labels_s.map((year, index) => ({ x: year, y: fallen[index] })),
+                pointRadius: 4,
+                backgroundColor: 'rgba(255, 144, 188, 0.2)',
+                borderColor: 'rgb(255, 144, 188, 1)',
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    type: 'linear',
+                    position: 'bottom',
+                    ticks: { min: Math.min(...labels_s), max: Math.max(...labels_s) }
+                }],
+                yAxes: [{
+                    ticks: { min: Math.min(...fallen), max: Math.max(...fallen) }
+                }],
+            },
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Rainfall Chart'
+            }
+        }
+    });
+}
+
+
+
+
+
+/* Mixed Chart Types */
+function updateMixed(data) {
+    console.log("Updating chart with data:", data);
+
+    var labels = data.map(entry => entry.year);
+    var fallen = data.map(entry => entry.aug);
+    var sep = data.map(entry => entry.sep);
+
+    var ctm = document.getElementById("cj7").getContext('2d');
+    var myMix = new Chart(ctm, {
+        type: 'bar', // Set the default chart type to 'bar'
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "Rainfall August ",
+                    backgroundColor: [
+                        'rgba(255, 144, 188, 0.2)',
+                        'rgba(217, 237, 191, 0.6)',
+                        'rgba(255, 192, 217, 0.2)',
+                        'rgba(138, 205, 215, 0.2)',
+                        'rgba(161, 238, 189, 0.2)',
+                        'rgba(243, 182, 100, 0.2)',
+                        'rgba(245, 238, 230, 0.8)',
+                        'rgba(225, 199, 143, 0.2)',
+                        'rgba(243, 182, 100, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgb(255, 144, 188, 1)',
+                        'rgb(217, 237, 191, 1)',
+                        'rgb(255, 192, 217, 1)',
+                        'rgb(138, 205, 215, 1)',
+                        'rgb(161, 238, 189, 1)',
+                        'rgb(243, 182, 100, 1)',
+                        'rgb(245, 238, 230, 1)',
+                        'rgb(225, 199, 143, 1)',
+                        'rgb(243, 182, 100, 1)'
+                    ],
+                    borderWidth: 1,
+                    data: fallen,
+                },
+                {
+                    label: "Rainfall September",
+                    type: 'line',
+                    backgroundColor: 'red',
+                    borderColor: 'rgb(161, 238, 189, 1)',
+                    data: sep,
+                    labels: labels,
+                    fill: false, // Do not fill area under the line
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            legend: { display: false },
+            title: {
+                display: false,
+                text: 'Rainfall Chart'
+            }
+        }
+    });
+}
+
+
+/* Bubble chart */
+function updateBubbleChart(data) {
+    console.log("Updating chart with data:", data);
+
+    var labels_b = data.map(entry => entry.year);
+    var fallen = data.map(entry => entry.oct);
+
+    var cta = document.getElementById("cj8").getContext('2d');
+    var myBubbleChart = new Chart(cta, {
+        type: 'bubble',
+        data: {
+            labels: labels_b,
+            datasets: [{
+                label: "October Rainfall",
+                data: labels_b.map((year, index) => ({ x: year, y: fallen[index], r: 8 })), // Adjust the 'r' value as needed
+                backgroundColor: 'rgba(255, 144, 188, 0.2)',
+                borderColor: 'rgb(255, 144, 188, 1)',
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    ticks: { min: Math.min(...labels_b), max: Math.max(...labels_b) }
+                },
+                y: {
+                    ticks: { min: Math.min(...fallen), max: Math.max(...fallen) }
+                },
+            },
+            legend: { display: false },
+            title: {
+                display: false,
+                text: 'Rainfall Chart'
+            }
+        }
+    });
+}
+
+
+
+
+
+/* Horizontal Bar chart */
+function updateHorizontalBarChart(data) {
+    console.log("Updating chart with data:", data);
+
+    var labels_ba = data.map(entry => entry.year);
+    var rainfallen = data.map(entry => entry.nov);
+
+    var cth = document.getElementById("cj10").getContext('2d');
+    var myHorizontalBarChart = new Chart(cth, {
+        type: 'bar',
+        data: {
+            labels: labels_ba,
+            datasets: [{
+                label: "November Rainfall",
+                backgroundColor: [
+                    'rgb(255, 144, 188, 0.2)',
+                    'rgb(217, 237, 191, 0.6)',
+                    'rgb(255, 192, 217, 0.2)',
+                    'rgb(138, 205, 215, 0.2)',
+                    'rgb(161, 238, 189, 0.2)',
+                    'rgb(243, 182, 100, 0.2)',
+                    'rgb(245, 238, 230, 0.8)',
+                    'rgb(225, 199, 143, 0.2)',
+                    'rgb(243, 182, 100, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 144, 188, 1)',
+                    'rgb(217, 237, 191, 1)',
+                    'rgb(255, 192, 217, 1)',
+                    'rgb(138, 205, 215, 1)',
+                    'rgb(161, 238, 189, 1)',
+                    'rgb(243, 182, 100, 1)',
+                    'rgb(245, 238, 230, 1)',
+                    'rgb(225, 199, 143, 1)',
+                    'rgb(243, 182, 100, 1)'
+                ],
+                borderWidth: 1,
+                data: rainfallen,
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true
+                }
+            },
+            legend: { display: false ,
+                labels: {
+                    fontSize: 2 // Set the font size for the legend
+                  }
+            },
+            title: {
+                display: false,
+                text: 'Rainfall in November'
+            }
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

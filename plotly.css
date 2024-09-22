@@ -1,0 +1,248 @@
+*{
+  padding: 0;
+  margin: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ 
+}
+#top-nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+position: fixed;
+
+width: 100%;
+height: 10vh;
+background-color: rgb(243, 242, 252);
+}
+
+.lf-nav{
+  display: flex;
+  margin: 1%;
+  position: absolute;
+  justify-content: space-around;
+  gap: 20px;
+  left: 0;
+  
+  
+}
+.rt-nav{
+  margin: 1%;
+  display: flex;
+  position: absolute;
+right: 0;
+justify-content:flex-end;
+gap: 20px;
+}
+.lf-nav i{
+  color: rgb(17, 124, 246);
+  transform: translateY(5px);
+}
+.lf-nav p{
+ color: rgb(58, 143, 254);
+  font-size: larger;
+}
+.rt-nav span input{
+  
+  border-radius: 8px;
+  padding:8px ;
+  border: 0.2px solid rgb(134, 134, 134);
+  outline: none;
+}
+
+.rt-nav i{
+  font-size: larger;
+  color: rgb(29, 144, 244);
+  transform: translateY(5px);
+}
+.rt-nav img{
+  width: 12%;
+  height: 12%;
+  transform: translateY(-5px);
+}
+.btm-nav{
+  background-color:rgb(255, 255, 255);
+  display:flex;
+  
+}
+#side-nav { 
+  width:13%;
+overflow: hidden;
+  height: 90vh;
+  background-color: rgb(210, 218, 250);
+  position: fixed;
+margin-top: 10vh;
+  justify-content:space-between;
+  display: flex;
+  list-style: none;
+}
+.sidebar a{
+  color: black;
+}
+.aside{
+  width:100%;
+  background-color: rgb(255, 255, 255);
+}
+.section{
+
+display:flex;
+
+}
+.section1{
+  
+
+display:flex;
+
+}
+.section2{
+display:flex;
+}
+
+.sidebar ul li  i{
+  color:rgb(65, 65, 175);
+  margin-bottom: 10px;
+  height:8vh;
+  
+display: flex;
+position: absolute;
+   
+} 
+.sidebar ul li a{
+  list-style: none;
+  text-decoration: none;
+margin-bottom: 10px;
+  position: absolute;
+}
+
+.sidebar li{
+  
+  
+  display: flex;
+  border-radius: 8px;
+
+ margin-left: 10px;
+  color: rgb(0, 0, 0);
+  
+
+}
+.btn{
+  width: 170px;
+  height: 8vh;
+  margin-top: 10px;
+  border-radius: 8px;
+  border-style: none;
+  display: flex;
+background-color:  rgb(210, 218, 250);
+}
+.btn:hover{
+  background-color: rgb(233, 237, 253);
+  box-shadow:   0 4px 8px 0 rgba(200, 187, 254, 0.326), 0 6px 20px 0 rgba(190, 177, 244, 0.419);
+}
+
+.p1{
+  padding: 10px 10px;
+  border: 0.2px solid rgb(255, 255, 255);
+  border-radius: 5px;
+  margin-top: 30px;
+  margin-left: 200px;
+  width: 600px;
+  height: 40vh; 
+  box-shadow:   0 4px 8px 0 rgba(200, 187, 254, 0.326), 0 6px 20px 0 rgba(190, 177, 244, 0.419);
+   background-color: rgb(255, 255, 255);
+display: flex;
+
+}
+.p11{
+padding: 10px 10px;
+border: 0.2px solid rgb(255, 255, 255);
+border-radius: 5px;
+margin-top: 20px;
+margin-left: 200px;
+width: 600px;
+height: 40vh; 
+box-shadow:   0 4px 8px 0 rgba(200, 187, 254, 0.326), 0 6px 20px 0 rgba(190, 177, 244, 0.419);
+ background-color: rgb(255, 255, 255);
+display: flex;
+
+}
+.p22{
+padding: 10px 10px;
+border: 0.2px solid rgb(255, 255, 255);
+border-radius: 5px;
+margin-top: 20px;
+margin-left: 20px;
+width: 650px;
+height: 40vh; 
+box-shadow:   0 4px 8px 0 rgba(200, 187, 254, 0.326), 0 6px 20px 0 rgba(190, 177, 244, 0.419);
+ background-color: rgb(255, 255, 255);
+display: flex;
+
+}
+.p2{
+border: 0.2px solid rgb(255, 255, 255);
+border-radius: 5px;
+margin-top: 30px;
+margin-left: 20px;
+width: 650px;
+height: 40vh;
+margin-right: 20px;
+box-shadow:  0 4px 8px 0 rgba(200, 187, 254, 0.326), 0 6px 20px 0 rgba(190, 177, 244, 0.419);
+background-color: rgb(255, 255, 255);
+}
+
+.pls{
+  display: flex;
+  
+  margin-top: 10px;
+
+justify-content: space-between;
+}
+.pl1 h2{
+ 
+ margin-top: 90px;
+ margin-left: 210px;
+}
+.pl {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px;
+ gap: 20px;
+}
+.plot{
+ 
+ padding: 8px 30px;
+
+  border: 1px solid rgb(234, 231, 231);
+  
+background-color: rgb(255, 255, 255);
+border-radius: 8px;
+box-shadow:   0 4px 8px 0 rgba(200, 187, 254, 0.326), 0 6px 20px 0 rgba(190, 177, 244, 0.419);
+
+}
+.plot a{
+
+text-decoration: none;
+list-style: none;
+
+}
+.plot1 a{
+  text-decoration: none;
+  list-style: none;
+  }
+.plot1{
+margin-top: 80px;
+  padding: 8px 28px;
+  border: 1px solid rgb(234, 231, 231);
+ 
+  box-shadow: 0 4px 8px 0 rgba(200, 187, 254, 0.326), 0 6px 20px 0 rgba(190, 177, 244, 0.419);
+  border-radius: 8px ;
+  background-color: rgb(255, 255, 255);
+}
+.plot1:hover{
+  background-color: rgb(243, 242, 252);
+}
+.contain{
+  display: flex;
+
+  margin-left: 20px;
+}
+
